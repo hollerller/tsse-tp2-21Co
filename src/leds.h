@@ -27,6 +27,7 @@ SPDX-License-Identifier: MIT
 /* === Headers files inclusions ================================================================ */
 
 #include <stdint.h>
+#include <stdbool.h>
 
 /* === Cabecera C++ ============================================================================ */
 
@@ -48,6 +49,12 @@ void leds_init(uint16_t * puerto);
 void leds_turn_on(int led);
 
 void leds_turn_off(int led);
+
+bool led_is_turned_on(int led);
+
+void leds_turn_on_all();
+
+void leds_turn_off_all();
 
 /* === End of documentation ==================================================================== */
 

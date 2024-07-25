@@ -21,10 +21,6 @@ SPDX-License-Identifier: MIT
 
 /*
 
-- Prender todos los leds juntos
-- Prender y apagar todos los leds juntos
-- Prender un led, voy a consultar el estado y tiene que figurar como prendido.
-- Voy a consultar el estado de un led apagado y tiene que figurar como apagado.
 - Revisar que los leds estan bien mapeados en la memoria
 */
 
@@ -101,5 +97,38 @@ void test_prender_dos_leds_y_apagar_un_solo_led(void) {
     TEST_ASSERT_EQUAL_HEX16(1 << 6, puerto_virtual); 
 
 }
+
+// - Voy a consultar el estado de un led apagado y tiene que figurar como apagado.
+
+void test_consultar_estado_led_apagado(void) {
+
+    TEST_ASSERT_FALSE(led_is_turned_on(3));
+}
+
+// - Prender un led, voy a consultar el estado y tiene que figurar como prendido.
+
+void test_consultar_estado_led_encendido(void) {
+
+    leds_turn_on(3); 
+    TEST_ASSERT_TRUE(led_is_turned_on(3));
+}
+
+// - Prender todos los leds juntos
+
+void test_prender_todos_los_leds(void) {
+
+    leds_turn_on_all();
+    TEST_ASSERT_EQUAL_HEX16(0xFFFF, puerto_virtual); 
+}
+
+// - Prender y apagar todos los leds juntos
+
+void test_prender_y_apagar_todos_los_leds(void) {
+
+    leds_turn_on_all();
+    leds_turn_off_all();
+    TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual); 
+}
+
 
 /* === End of documentation ==================================================================== */
