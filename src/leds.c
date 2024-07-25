@@ -39,8 +39,21 @@ SPDX-License-Identifier: MIT
 
 /* === Public function implementation ========================================================== */
 
+static uint16_t * puerto_virtual;
+
 void leds_init(uint16_t * puerto) {
-    *puerto = 0;
+    puerto_virtual = puerto;
+    *puerto_virtual = 0;
 }
+
+void leds_turn_on(int led) {
+    *puerto_virtual = 4;
+}
+
+void leds_turn_on_all(void) {
+    *puerto_virtual = 0xFFFF;
+}
+
+
 
 /* === End of documentation ==================================================================== */
