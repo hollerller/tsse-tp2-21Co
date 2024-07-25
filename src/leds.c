@@ -25,6 +25,10 @@ SPDX-License-Identifier: MIT
 
 /* === Macros definitions ====================================================================== */
 
+#define LED_OFFSET 1
+#define FIRST_BIT 1
+#define ALL_LEDS_OFF 0x0000
+
 /* === Private data type declarations ========================================================== */
 
 /* === Private variable declarations =========================================================== */
@@ -41,17 +45,21 @@ SPDX-License-Identifier: MIT
 
 static uint16_t * puerto_virtual;
 
+static uint16_t led_to_mask(int led) {
+    return (FIRST_BIT << (led - LED_OFFSET));
+}
+
 void leds_init(uint16_t * puerto) {
     puerto_virtual = puerto;
-    *puerto_virtual = 0;
+    *puerto_virtual = ALL_LEDS_OFF;
 }
 
 void leds_turn_on(int led) {
-    *puerto_virtual = 4;
+    *puerto_virtual |= led_to_mask(led);
 }
 
-void leds_turn_on_all(void) {
-    *puerto_virtual = 0xFFFF;
+void leds_turn_off(int led) {
+    *puerto_virtual &= ~led_to_mask(led);
 }
 
 
