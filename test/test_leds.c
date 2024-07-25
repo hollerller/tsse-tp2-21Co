@@ -21,7 +21,7 @@ SPDX-License-Identifier: MIT
 
 /*
 
-- Revisar que los leds estan bien mapeados en la memoria
+
 */
 
 /* === Headers files inclusions =============================================================== */
@@ -129,6 +129,16 @@ void test_prender_y_apagar_todos_los_leds(void) {
     leds_turn_off_all();
     TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual); 
 }
+
+// - Revisar que los leds estan bien mapeados en la memoria
+
+void test_revisar_mapeo_leds(void) {
+
+    leds_turn_on(3); 
+    TEST_ASSERT_TRUE(led_is_turned_on(3));
+    TEST_ASSERT_EQUAL_HEX16(0x0004, puerto_virtual); 
+}
+
 
 
 /* === End of documentation ==================================================================== */
