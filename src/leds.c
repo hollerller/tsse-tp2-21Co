@@ -20,7 +20,7 @@ SPDX-License-Identifier: MIT
 *************************************************************************************************/
 
 /**
- * @file leds.h
+ * @file leds.c
  * @brief Definicion de las funciones para controlar los leds.
  */
 
@@ -36,7 +36,7 @@ SPDX-License-Identifier: MIT
 #define LED_OFFSET 1
 
 /**
- * @brief Posicion del bit correspondiente al primer led 
+ * @brief Posicion del bit correspondiente al primer led
  */
 #define FIRST_BIT 1
 
@@ -55,7 +55,7 @@ SPDX-License-Identifier: MIT
 /* === Private variable declarations =========================================================== */
 
 /**
- * @brief Puntero que corresponde al puerto virtual para los leds. 
+ * @brief Puntero que corresponde al puerto virtual para los leds.
  * Simula el puerto de Hardware donde se conectan los leds
  */
 
@@ -65,7 +65,7 @@ static uint16_t * puerto_virtual;
 
 /**
  * @brief Funcion que convierte un numero de led a una mascara de bits
- * 
+ *
  * @param led  Numero del led a convertir
  * @return * uint16_t Mascara de bits corresopndiente al led
  */
@@ -86,8 +86,9 @@ static uint16_t led_to_mask(int led) {
 
 /**
  * @brief Funcion para inicializar los leds. Coloca en cero todos los leds
- * 
- * @param puerto Puerto virtual para los leds. Simula el puerto de Hardware donde se conectan los leds
+ *
+ * @param puerto Puerto virtual para los leds. Simula el puerto de Hardware donde se conectan los
+ * leds
  */
 
 void leds_init(uint16_t * puerto) {
@@ -98,7 +99,7 @@ void leds_init(uint16_t * puerto) {
 /**
  * @brief Funcion para encender un led. Coloca un 1 en el bit correspondiente al led
  * si el led se encuentra en el rango de 1 a 16 inclusive
- * 
+ *
  * @param led Numero del led a verificar
  */
 
@@ -111,21 +112,20 @@ void leds_turn_on(int led) {
 /**
  * @brief Funcion para apagar un led. Coloca un cero en el bit correspondiente al led
  * si el led se encue en el rango de 1 a 16 inclusive
- * 
+ *
  * @param led Numero del led a verificar
  */
-
 
 void leds_turn_off(int led) {
     if (led >= 1 && led <= 16) {
         *puerto_virtual &= ~led_to_mask(led);
     }
 }
-    
+
 /**
- * @brief Funcion para verificar si un led esta encendido o apagado 
+ * @brief Funcion para verificar si un led esta encendido o apagado
  * si el led se encuentra dentro en el rango de 1 a 16 inclusive
- * 
+ *
  * @param led Numero del led a verificar
  * @return true si el led esta encendido
  * @return false si el led esta apagado
@@ -141,7 +141,7 @@ bool led_is_turned_on(int led) {
 }
 
 /**
- * @brief Funcion para encender todos los leds. Coloca el valor 0xFFFF en el puerto virtual 
+ * @brief Funcion para encender todos los leds. Coloca el valor 0xFFFF en el puerto virtual
  */
 
 void leds_turn_on_all() {
@@ -149,7 +149,7 @@ void leds_turn_on_all() {
 }
 
 /**
- * @brief Funcion para apagar todos los leds. Coloca el valor 0x0000 en el puerto virtual 
+ * @brief Funcion para apagar todos los leds. Coloca el valor 0x0000 en el puerto virtual
  */
 
 void leds_turn_off_all() {
