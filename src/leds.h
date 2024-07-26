@@ -22,7 +22,10 @@ SPDX-License-Identifier: MIT
 #ifndef LEDS_H
 #define LEDS_H
 
-
+/**
+ * @file leds.h
+ * @brief Declaracion de las funciones para controlar los leds.
+ */
 
 /* === Headers files inclusions ================================================================ */
 
@@ -43,16 +46,49 @@ extern "C" {
 
 /* === Public function declarations ============================================================ */
 
+/**
+ * @brief Funcion para inicializar los leds
+ * 
+ * @param puerto Puerto virtual para los leds. Simula el puerto de Hardware donde se conectan los leds
+ */
 
 void leds_init(uint16_t * puerto);
 
+/**
+ * @brief Funciona para encender un led
+ * 
+ * @param led Numero del led a verificar
+ */
+
 void leds_turn_on(int led);
+
+/**
+ * @brief Funcion para apagar un led
+ * 
+ * @param led Numero del led a verificar
+ */
 
 void leds_turn_off(int led);
 
+/**
+ * @brief Funcion para verificar si un led esta encendido o apagado
+ * 
+ * @param led Numero del led a verificar
+ * @return true si el led esta encendido
+ * @return false si el led esta apagado
+ */
+
 bool led_is_turned_on(int led);
 
+/**
+ * @brief Funcion para encender todos los leds
+ */
+
 void leds_turn_on_all();
+
+/**
+ * @brief Funcion para apagar todos los leds
+ */
 
 void leds_turn_off_all();
 
