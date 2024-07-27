@@ -20,7 +20,7 @@ SPDX-License-Identifier: MIT
 *************************************************************************************************/
 
 /**
- * @file test_leds.c    
+ * @file test_leds.c
  * @brief Test unitario para modulo de control de 16 leds de dos estados
  */
 
@@ -45,7 +45,7 @@ SPDX-License-Identifier: MIT
  * @brief Puerto virtual para los leds. Simula el puerto de Hardware donde se conectan los leds
  */
 
-static uint16_t puerto_virtual; 
+static uint16_t puerto_virtual;
 
 /* === Private function implementation ========================================================= */
 
@@ -56,7 +56,7 @@ static uint16_t puerto_virtual;
  */
 
 void setUp(void) {
-   
+
     leds_init(&puerto_virtual);
 }
 
@@ -66,22 +66,22 @@ void setUp(void) {
 
 void test_todos_los_leds_deben_arrancar_apagados(void) {
 
-    uint16_t puerto_virtual = 0xFFFF;  
-    leds_init(&puerto_virtual);   
-    TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual);   
+    uint16_t puerto_virtual = 0xFFFF;
+    leds_init(&puerto_virtual);
+    TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual);
 }
 
 /**
- * @test Despues de arrancar el sistema, con todos los leds apagados, 
+ * @test Despues de arrancar el sistema, con todos los leds apagados,
  * voy a prender un led cualquiera
- * 
+ *
  * Implicitamente tambien prueba que los leds estan bien mapeados en la memoria
  */
 
 void test_prender_un_solo_led(void) {
-   
-    leds_turn_on(3); 
-    TEST_ASSERT_EQUAL_HEX16(1 << 2, puerto_virtual); 
+
+    leds_turn_on(3);
+    TEST_ASSERT_EQUAL_HEX16(1 << 2, puerto_virtual);
 }
 
 /**
@@ -89,23 +89,23 @@ void test_prender_un_solo_led(void) {
  */
 
 void test_prender_y_apagar_un_solo_led(void) {
-  
-    leds_turn_on(3); 
-    leds_turn_off(3); 
-    TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual); 
+
+    leds_turn_on(3);
+    leds_turn_off(3);
+    TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual);
 }
 
 /**
- * @test Prender dos leds, apagar uno, y ver que solo se apaga el que corresponde 
+ * @test Prender dos leds, apagar uno, y ver que solo se apaga el que corresponde
  * y que el otro sigue prendido
  */
 
 void test_prender_dos_leds_y_apagar_un_solo_led(void) {
-  
-    leds_turn_on(3); 
-    leds_turn_on(7); 
-    leds_turn_off(3); 
-    TEST_ASSERT_EQUAL_HEX16(1 << 6, puerto_virtual); 
+
+    leds_turn_on(3);
+    leds_turn_on(7);
+    leds_turn_off(3);
+    TEST_ASSERT_EQUAL_HEX16(1 << 6, puerto_virtual);
 }
 
 /**
@@ -123,7 +123,7 @@ void test_consultar_estado_led_apagado(void) {
 
 void test_consultar_estado_led_encendido(void) {
 
-    leds_turn_on(3); 
+    leds_turn_on(3);
     TEST_ASSERT_TRUE(led_is_turned_on(3));
 }
 
@@ -134,7 +134,7 @@ void test_consultar_estado_led_encendido(void) {
 void test_prender_todos_los_leds(void) {
 
     leds_turn_on_all();
-    TEST_ASSERT_EQUAL_HEX16(0xFFFF, puerto_virtual); 
+    TEST_ASSERT_EQUAL_HEX16(0xFFFF, puerto_virtual);
 }
 
 /**
@@ -145,26 +145,28 @@ void test_prender_y_apagar_todos_los_leds(void) {
 
     leds_turn_on_all();
     leds_turn_off_all();
-    TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual); 
+    TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual);
 }
 
 /**
  * @test Probar leds fuera del rango valido
- * 
+ *
  * Encender y apagar leds con valores mayores a 16 y menores a 1
  * y validar que el estado del puerto no cambia en cada cambio.
  */
 
 void test_leds_fuera_de_rango(void) {
 
-    leds_turn_on(-1); 
-    TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual); 
-    leds_turn_on(17); 
-    TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual); 
+    leds_turn_on(-1);
+    TEST_ASSERT_FALSE(led_is_turned_on(-1));
+    TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual);
+    leds_turn_on(17);
+    TEST_ASSERT_FALSE(led_is_turned_on(17));
+    TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual);
     leds_turn_off(-1);
-    TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual); 
-    leds_turn_off(17); 
-    TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual); 
+    TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual);
+    leds_turn_off(17);
+    TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual);
 }
 
 /* === End of documentation ==================================================================== */

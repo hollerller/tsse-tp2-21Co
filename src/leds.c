@@ -135,8 +135,6 @@ bool led_is_turned_on(int led) {
     bool check = ((*puerto_virtual & led_to_mask(led)) != 0);
     if (led >= 1 && led <= 16) {
         return check;
-    } else {
-        return false;
     }
 }
 
