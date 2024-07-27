@@ -48,15 +48,16 @@ extern "C" {
 
 /**
  * @brief Funcion para inicializar los leds
- * 
- * @param puerto Puerto virtual para los leds. Simula el puerto de Hardware donde se conectan los leds
+ *
+ * @param puerto Puerto virtual para los leds. Simula el puerto de Hardware donde se conectan los
+ * leds
  */
 
 void leds_init(uint16_t * puerto);
 
 /**
  * @brief Funciona para encender un led
- * 
+ *
  * @param led Numero del led a verificar
  */
 
@@ -64,7 +65,7 @@ void leds_turn_on(int led);
 
 /**
  * @brief Funcion para apagar un led
- * 
+ *
  * @param led Numero del led a verificar
  */
 
@@ -72,7 +73,7 @@ void leds_turn_off(int led);
 
 /**
  * @brief Funcion para verificar si un led esta encendido o apagado
- * 
+ *
  * @param led Numero del led a verificar
  * @return true si el led esta encendido
  * @return false si el led esta apagado
