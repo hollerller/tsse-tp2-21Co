@@ -158,10 +158,10 @@ void test_prender_y_apagar_todos_los_leds(void) {
 void test_leds_fuera_de_rango(void) {
 
     leds_turn_on(-1);
-    // TEST_ASSERT_FALSE(led_is_turned_on(-1));
+    TEST_ASSERT_FALSE(led_is_turned_on(-1));
     TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual);
     leds_turn_on(17);
-    // TEST_ASSERT_FALSE(led_is_turned_on(17));
+    TEST_ASSERT_FALSE(led_is_turned_on(17));
     TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual);
     leds_turn_off(-1);
     TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual);
