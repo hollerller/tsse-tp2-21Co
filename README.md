@@ -13,6 +13,18 @@ Después de clonar el repositorio usted debería ejecutar el siguiente comando:
 pre-commit install
 ```
 
+Para ejecutar las pruebas unitarias se utiliza el siguiente comando:
+
+```
+ceedling test:all
+```
+
+Para generar el informe de cobertura de las pruebas se utiliza el siguiente comando:
+
+```
+ceedling clobber gcov:all utils:gcov
+```
+
 Para generar la documentación del proyecto se utiliza el siguiente comando:
 
 ```
